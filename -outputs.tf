@@ -1,6 +1,6 @@
 output "bucket" {
   description = "bucket friendly name"
-  value       = aws_s3_bucket.remote_state_backend.bucket
+  value       = aws_s3_bucket.this.bucket
 }
 
 output "dynamodb_table" {
