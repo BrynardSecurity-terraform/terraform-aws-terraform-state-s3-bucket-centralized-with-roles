@@ -24,7 +24,7 @@ data "aws_iam_policy_document" "account_specific_policy" {
       "s3:ListBucketMultipartUploads"
     ]
     resources = [
-      aws_s3_bucket.remote_state_backend.arn
+      aws_s3_bucket.this.arn
     ]
     sid = "AllowAccessToRemoteStateBackendBucket"
   }
@@ -36,8 +36,8 @@ data "aws_iam_policy_document" "account_specific_policy" {
       "s3:Put*"
     ]
     resources = [
-      "${aws_s3_bucket.remote_state_backend.arn}/${replace(var.account_arns[count.index], local.account_from_arn, "$5")}",
-      "${aws_s3_bucket.remote_state_backend.arn}/${replace(var.account_arns[count.index], local.account_from_arn, "$5")}/*"
+      "${aws_s3_bucket.this.arn}/${replace(var.account_arns[count.index], local.account_from_arn, "$5")}",
+      "${aws_s3_bucket.this.arn}/${replace(var.account_arns[count.index], local.account_from_arn, "$5")}/*"
     ]
     sid = "AllowAccessToRemoteStateBackendKey"
   }
